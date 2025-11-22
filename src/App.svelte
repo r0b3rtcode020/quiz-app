@@ -7,6 +7,6 @@
 
 <Router>
   <Route path="/" component={QuizSelection} />
-  <Route path="/quiz" component={Quiz} />
+  <Route path="/quiz/:subject" component={Quiz} />
   <Route path="/result" component={Result} />
 </Router>
