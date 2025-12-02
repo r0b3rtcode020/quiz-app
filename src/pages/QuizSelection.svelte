@@ -7,5 +7,5 @@
 <p>Pick a subject to get started.</p>
 
 {#each quizStore.quizzes as { title, icon }, i (i)}
-  <Subject href={`/quiz/${title.toLowerCase()}`} text={title} {icon} />
+  <Subject href={`/quiz/${title.toLowerCase()}/1`} text={title} {icon} />
 {/each}
