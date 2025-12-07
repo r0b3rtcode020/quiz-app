@@ -25,33 +25,28 @@
   const getButtonClass = option => {
     if (!showFeedback) return "";
 
-    const normalizedOption = normalizeText(option);
-    const normalizedSelected = normalizeText(selectedAnswer);
-    const normalizedCorrect = normalizeText(currentAnswer);
+    const isSelected = normalizeText(option) === normalizeText(selectedAnswer);
+    const isCorrect = normalizeText(option) === normalizeText(currentAnswer);
 
-    if (normalizedOption === normalizedSelected && normalizedOption === normalizedCorrect) {
-      return "correct";
-    } else if (normalizedOption === normalizedSelected && normalizedOption !== normalizedCorrect) {
-      return "incorrect";
-    }
+    if (isSelected && isCorrect) return "correct";
+    if (isSelected && !isCorrect) return "incorrect";
+
     return "";
   };
 
-  const showIcon = option => {
+  const shouldShowIcon = option => {
     if (!showFeedback) return false;
 
     const normalizedOption = normalizeText(option);
-    const normalizedSelected = normalizeText(selectedAnswer);
-    const normalizedCorrect = normalizeText(currentAnswer);
+    const isCorrectAnswer = normalizedOption === normalizeText(currentAnswer);
+    const isSelectedAnswer = normalizedOption === normalizeText(selectedAnswer);
 
-    return normalizedOption === normalizedCorrect || normalizedOption === normalizedSelected;
+    return isCorrectAnswer || isSelectedAnswer;
   };
 
   const getIcon = option => {
-    const normalizedOption = normalizeText(option);
-    const normalizedCorrect = normalizeText(currentAnswer);
-
-    return normalizedOption === normalizedCorrect ? IconCorrect : IconIncorrect;
+    const isCorrectAnswer = normalizeText(option) === normalizeText(currentAnswer);
+    return isCorrectAnswer ? IconCorrect : IconIncorrect;
   };
 
   const handleNavigation = () => {
@@ -59,11 +54,11 @@
       errorMessage = true;
       return;
     }
-    if (Number(questionIndex) < quiz?.questions?.length) {
-      navigate(`/quiz/${subject}/${Number(questionIndex) + 1}`, { replace: true });
-    } else {
-      navigate("/result", { replace: true });
-    }
+
+    const isLastQuestion = Number(questionIndex) >= quiz?.questions?.length;
+    const nextRoute = isLastQuestion ? "/result" : `/quiz/${subject}/${Number(questionIndex) + 1}`;
+
+    navigate(nextRoute, { replace: true });
   };
 </script>
 
@@ -78,7 +73,7 @@
         disabled={showFeedback}
       >
         {options}
-        {#if showIcon(options)}
+        {#if shouldShowIcon(options)}
           <img src={getIcon(options)} alt={options === currentAnswer ? "Correct" : "Incorrect"} />
         {/if}
       </button>
