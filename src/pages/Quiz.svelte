@@ -28,6 +28,14 @@
 
     navigate(nextRoute, { replace: true });
   };
+
+  $effect(() => {
+    if (questionIndex) {
+      selectedAnswer = null;
+      showFeedback = false;
+      errorMessage = false;
+    }
+  });
 </script>
 
 <h1>{currentQuestion?.question}</h1>
