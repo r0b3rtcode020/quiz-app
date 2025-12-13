@@ -1,6 +1,7 @@
 <script>
   import { navigate } from "svelte5-router";
   import { quizStore } from "../store/store.svelte.js";
+  import IconError from "../assets/images/icon-error.svg";
   import OptionsList from "../components/OptionsList.svelte";
 
   let { subject, questionIndex } = $props();
@@ -51,5 +52,8 @@
 <button type="button" onclick={handleNavigation}>Submit answer</button>
 
 {#if errorMessage}
-  <p>Select an option!</p>
+  <div>
+    <img src={IconError} alt="Error message" />
+    <p>Please select an answer</p>
+  </div>
 {/if}
