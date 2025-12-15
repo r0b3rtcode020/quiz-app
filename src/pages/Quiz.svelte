@@ -1,6 +1,11 @@
 <script>
   import { navigate } from "svelte5-router";
-  import { quizStore } from "../store/store.svelte.js";
+  import {
+    quizStore,
+    resetScore,
+    incrementScore,
+    setTotalQuestions,
+  } from "../store/store.svelte.js";
   import IconError from "../assets/images/icon-error.svg";
   import OptionsList from "../components/OptionsList.svelte";
 
@@ -16,6 +21,10 @@
     selectedAnswer = answer;
     showFeedback = true;
     errorMessage = false;
+
+    if (answer === currentQuestion?.answer) {
+      incrementScore();
+    }
   };
 
   const handleNavigation = () => {
@@ -35,6 +44,11 @@
       selectedAnswer = null;
       showFeedback = false;
       errorMessage = false;
+
+      if (Number(questionIndex) === 1) {
+        resetScore();
+        setTotalQuestions(quiz?.questions?.length || 0);
+      }
     }
   });
 </script>
