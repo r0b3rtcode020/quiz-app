@@ -8,6 +8,7 @@
   } from "../store/store.svelte.js";
   import IconError from "../assets/images/icon-error.svg";
   import OptionsList from "../components/OptionsList.svelte";
+  import Button from "../components/Button.svelte";
 
   let { subject, questionIndex } = $props();
   let quiz = $derived(quizStore.quizzes.find(question => question.title.toLowerCase() === subject));
@@ -63,7 +64,7 @@
   onAnswerSelect={handleAnswer}
 />
 
-<button type="button" onclick={handleNavigation}>Submit answer</button>
+<Button label="Submit answer" onClick={handleNavigation} />
 
 {#if errorMessage}
   <div>

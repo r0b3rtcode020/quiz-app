@@ -1,6 +1,7 @@
 <script>
   import { quizStore } from "../store/store.svelte.js";
   import { navigate } from "svelte5-router";
+  import Button from "../components/Button.svelte";
 
   const handlePlayAgain = () => navigate("/", { replace: true });
 </script>
@@ -13,4 +14,4 @@
   <p>out of {quizStore.totalQuestions}</p>
 </div>
 
-<button type="button" onclick={handlePlayAgain}>Play Again</button>
+<Button label="Play again" onClick={handlePlayAgain} />
