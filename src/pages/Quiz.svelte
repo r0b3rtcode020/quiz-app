@@ -6,9 +6,14 @@
     incrementScore,
     setTotalQuestions,
   } from "../store/store.svelte.js";
-  import IconError from "../assets/images/icon-error.svg";
   import OptionsList from "../components/OptionsList.svelte";
   import Button from "../components/Button.svelte";
+  import ErrorMessage from "../components/ErrorMessage.svelte";
+  import Question from "../components/Question.svelte";
+  import SecondaryText from "../components/SecondaryText.svelte";
+  import Switch from "../components/Switch.svelte";
+  import SubjectSelected from "../components/SubjectSelected.svelte";
+  import ProgressBar from "../components/ProgressBar.svelte";
 
   let { subject, questionIndex } = $props();
   let quiz = $derived(quizStore.quizzes.find(question => question.title.toLowerCase() === subject));
@@ -54,8 +59,11 @@
   });
 </script>
 
-<h1>{currentQuestion?.question}</h1>
-
+<SubjectSelected />
+<Switch />
+<SecondaryText>Question {questionIndex} of {quizStore?.totalQuestions}</SecondaryText>
+<Question question={currentQuestion?.question} />
+<ProgressBar />
 <OptionsList
   options={currentQuestion?.options || []}
   {selectedAnswer}
@@ -63,12 +71,7 @@
   {showFeedback}
   onAnswerSelect={handleAnswer}
 />
-
 <Button label="Submit answer" onClick={handleNavigation} />
-
 {#if errorMessage}
-  <div>
-    <img src={IconError} alt="Error message" />
-    <p>Please select an answer</p>
-  </div>
+  <ErrorMessage message="Please select an answer" />
 {/if}
