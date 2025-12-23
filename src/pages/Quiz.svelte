@@ -2,9 +2,10 @@
   import { navigate } from "svelte5-router";
   import {
     quizStore,
-    resetScore,
     incrementScore,
-    setTotalQuestions,
+    advanceQuestion,
+    completeQuiz,
+    getRedirectRoute,
   } from "../store/store.svelte.js";
   import OptionsList from "../components/OptionsList.svelte";
   import Button from "../components/Button.svelte";
@@ -16,12 +17,35 @@
   import ProgressBar from "../components/ProgressBar.svelte";
 
   let { subject, questionIndex } = $props();
-  let quiz = $derived(quizStore.quizzes.find(question => question.title.toLowerCase() === subject));
-  let currentQuestion = $derived(quiz?.questions[Number(questionIndex) - 1]);
+
+  let requestedIndex = $derived(Number(questionIndex));
+  let quiz = $derived(quizStore.quizzes.find(q => q.title.toLowerCase() === subject));
+  let currentQuestion = $derived(quiz?.questions[requestedIndex - 1]);
 
   let selectedAnswer = $state(null);
   let showFeedback = $state(false);
   let errorMessage = $state(false);
+
+  // Validaciones como $derived (solo para cálculos)
+  let isInvalidQuiz = $derived(
+    !quizStore.isQuizActive ||
+      !quizStore.currentSubject ||
+      subject !== quizStore.currentSubject ||
+      !Number.isFinite(requestedIndex) ||
+      requestedIndex !== quizStore.currentQuestionIndex
+  );
+
+  // Efecto que maneja las redirecciones
+  $effect(() => {
+    if (quizStore.isQuizCompleted) {
+      navigate("/result", { replace: true });
+      return;
+    }
+
+    if (isInvalidQuiz) {
+      navigate(getRedirectRoute(), { replace: true });
+    }
+  });
 
   const handleAnswer = answer => {
     selectedAnswer = answer;
@@ -39,24 +63,21 @@
       return;
     }
 
-    const isLastQuestion = Number(questionIndex) >= quiz?.questions?.length;
-    const nextRoute = isLastQuestion ? "/result" : `/quiz/${subject}/${Number(questionIndex) + 1}`;
+    const isLastQuestion = quizStore.currentQuestionIndex >= (quiz?.questions?.length || 0);
 
-    navigate(nextRoute, { replace: true });
-  };
-
-  $effect(() => {
-    if (questionIndex) {
-      selectedAnswer = null;
-      showFeedback = false;
-      errorMessage = false;
-
-      if (Number(questionIndex) === 1) {
-        resetScore();
-        setTotalQuestions(quiz?.questions?.length || 0);
-      }
+    if (isLastQuestion) {
+      completeQuiz();
+      navigate("/result", { replace: true });
+      return;
     }
-  });
+
+    selectedAnswer = null;
+    showFeedback = false;
+    errorMessage = false;
+
+    advanceQuestion();
+    navigate(`/quiz/${subject}/${quizStore.currentQuestionIndex}`, { replace: true });
+  };
 </script>
 
 <SubjectSelected />

@@ -1,12 +1,10 @@
 <script>
-  import { link } from "svelte5-router";
-
-  let { href, text, icon } = $props();
+  let { title, icon, onClick } = $props();
 </script>
 
-<a {href} use:link>
+<button type="button" onclick={onClick}>
   <figure>
-    <img src={icon} alt={text} />
+    <img src={icon} alt={title} />
   </figure>
-  <span>{text}</span>
-</a>
+  <span>{title}</span>
+</button>
