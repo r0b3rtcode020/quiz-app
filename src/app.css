@@ -1,0 +1,129 @@
+/* @import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500&family=Rubik:ital,wght@1,400&display=swap"); */
+@font-face {
+  font-family: "Rubik";
+  src: url("/fonts/Rubik-VariableFont_wght.ttf") format("truetype");
+  font-weight: 300 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Rubik";
+  src: url("/fonts/Rubik-Italic-VariableFont_wght.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+}
+
+/****************************************************
+ *******************   VARIABLES   ******************
+ ****************************************************/
+
+:root {
+  /* Colors */
+  --clr-blue-50: #ebf0ff;
+  --clr-blue-100: #edf1f9;
+  --clr-blue-300: #abc1e1;
+  --clr-blue-500: #306aff;
+  --clr-blue-850: #3b4d66;
+  --clr-blue-900: #313e51;
+  --clr-blue-950: #2d3949;
+  --clr-green-100: #e0fdef;
+  --clr-green-500: #2fd887;
+  --clr-purple-100: #f6e7ff;
+  --clr-purple-600: #a729f5;
+  --clr-orange-50: #fff5ed;
+  --clr-orange-400: #ff7e35;
+  --clr-red-500: #ee5454;
+  --clr-grey-50: #f4f6fa;
+  --clr-grey-500: #626c7f;
+  --clr-white: #ffffff;
+  --clr-black: #000000;
+
+  /* Font */
+  --ff-primary: "Rubik", sans-serif;
+
+  /* Font Size */
+  --fs-14: 0.875rem;
+  --fs-18: 1.125rem;
+  --fs-20: 1.25rem;
+  --fs-24: 1.5rem;
+  --fs-28: 1.75rem;
+  --fs-36: 2.25rem;
+  --fs-40: 2.5rem;
+  --fs-64: 4rem;
+  --fs-88: 5.5rem;
+  --fs-144: 9rem;
+
+  /* Font Weight */
+  --fw-light: 300;
+  --fw-regular: 400;
+  --fw-medium: 500;
+
+  /* Font Style */
+  --style-italic: italic;
+
+  /* Line Height */
+  --lh-100: 1;
+  --lh-120: 1.2;
+  --lh-150: 1.5;
+
+  /* Spacing */
+  --sp-8: 0.5rem;
+  --sp-16: 1rem;
+  --sp-24: 1.5rem;
+  --sp-32: 2rem;
+  --sp-40: 2.5rem;
+  --sp-48: 3rem;
+  --sp-64: 4rem;
+  --sp-128: 8rem;
+  --sp-144: 9rem;
+  --sp-184: 11.5rem;
+
+  /* Drop Shadows */
+  --shadow-light: 0 1rem 2.5rem rgba(143, 160, 193, 0.14);
+  --shadow-dark: 0 1rem 2.5rem rgba(49, 62, 81, 0.14);
+}
+
+/****************************************************
+ *******************   RESET   **********************
+ ****************************************************/
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100dvh;
+  font-family: var(--ff-primary);
+  font-size: clamp(var(--fs-18), 4vw, var(--fs-28));
+  font-weight: var(--fw-medium);
+  line-height: var(--lh-100);
+  background-color: var(--clr-grey-50);
+  color: var(--clr-blue-900);
+}
+
+h1 {
+  font-weight: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+button {
+  font: inherit;
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
