@@ -12,6 +12,7 @@
   {#each options as option, i (i)}
     <li>
       <Option
+        index={i}
         {option}
         isSelected={isSelected(option)}
         isCorrect={isCorrect(option)}
