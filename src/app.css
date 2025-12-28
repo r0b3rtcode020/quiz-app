@@ -67,12 +67,15 @@
   --lh-150: 1.5;
 
   /* Spacing */
+  --sp-4: 0.25rem;
   --sp-8: 0.5rem;
+  --sp-12: 0.75rem;
   --sp-16: 1rem;
   --sp-24: 1.5rem;
   --sp-32: 2rem;
   --sp-40: 2.5rem;
   --sp-48: 3rem;
+  --sp-56: 3.5rem;
   --sp-64: 4rem;
   --sp-128: 8rem;
   --sp-144: 9rem;
@@ -81,6 +84,26 @@
   /* Drop Shadows */
   --shadow-light: 0 1rem 2.5rem rgba(143, 160, 193, 0.14);
   --shadow-dark: 0 1rem 2.5rem rgba(49, 62, 81, 0.14);
+}
+
+[data-theme="light"] {
+  --clr-bg: var(--clr-grey-50);
+  --clr-text: var(--clr-blue-900);
+  --clr-tagline: var(--clr-grey-500);
+  --clr-error: var(--clr-red-500);
+  --subject-bg: var(--clr-white);
+  --subject-text: var(--clr-blue-900);
+  --shadow: var(--shadow-light);
+}
+
+[data-theme="dark"] {
+  --clr-bg: var(--clr-blue-900);
+  --clr-text: var(--clr-white);
+  --clr-tagline: var(--clr-blue-300);
+  --clr-error: var(--clr-grey-50);
+  --subject-bg: var(--clr-blue-850);
+  --subject-text: var(--clr-white);
+  --shadow: var(--shadow-dark);
 }
 
 /****************************************************
@@ -101,8 +124,8 @@ body {
   font-size: clamp(var(--fs-18), 4vw, var(--fs-28));
   font-weight: var(--fw-medium);
   line-height: var(--lh-100);
-  background-color: var(--clr-grey-50);
-  color: var(--clr-blue-900);
+  background-color: var(--clr-bg);
+  color: var(--clr-text);
 }
 
 h1 {
