@@ -1,11 +1,11 @@
 <script>
   import SubjectSelected from "./SubjectSelected.svelte";
 
-  let { score, totalQuestions } = $props();
+  let { score, totalQuestions, subject, icon } = $props();
 </script>
 
 <div class="score-container">
-  <SubjectSelected />
+  <SubjectSelected {subject} {icon} />
   <div class="score-content">
     <p class="score">{score}</p>
     <p class="total">out of {totalQuestions}</p>
