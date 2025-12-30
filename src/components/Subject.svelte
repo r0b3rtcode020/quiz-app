@@ -8,7 +8,7 @@
       javascript: "js",
       accessibility: "accessibility",
     };
-    return colorMap[title.toLowerCase()] || "default";
+    return colorMap[title.toLowerCase()] || "";
   });
 </script>
 

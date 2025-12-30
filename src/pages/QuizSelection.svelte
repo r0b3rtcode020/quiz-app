@@ -10,12 +10,12 @@
     resetProgress();
   });
 
-  const handleStart = title => {
+  const handleStart = (title, icon) => {
     const subject = title.toLowerCase();
     const quiz = quizStore.quizzes.find(q => q.title.toLowerCase() === subject);
     const total = quiz?.questions?.length || 0;
 
-    startQuiz(subject, total);
+    startQuiz(subject, total, icon);
     navigate(`/quiz/${subject}/1`);
   };
 </script>
@@ -25,5 +25,5 @@
 <SecondaryText>Pick a subject to get started.</SecondaryText>
 
 {#each quizStore?.quizzes as { title, icon }, i (i)}
-  <Subject {title} {icon} onClick={() => handleStart(title)} />
+  <Subject {title} {icon} onClick={() => handleStart(title, icon)} />
 {/each}

@@ -3,6 +3,7 @@ export let quizStore = $state({
   score: 0,
   totalQuestions: 0,
   currentSubject: null,
+  currentIcon: null,
   currentQuestionIndex: 1,
   isQuizActive: false,
   isQuizCompleted: false,
@@ -16,6 +17,7 @@ export const setTotalQuestions = total => (quizStore.totalQuestions = total);
 
 export const resetProgress = () => {
   quizStore.currentSubject = null;
+  quizStore.currentIcon = null;
   quizStore.currentQuestionIndex = 1;
   quizStore.isQuizActive = false;
   quizStore.isQuizCompleted = false;
@@ -24,9 +26,10 @@ export const resetProgress = () => {
   setTotalQuestions(0);
 };
 
-export const startQuiz = (subject, totalQuestions) => {
+export const startQuiz = (subject, totalQuestions, icon) => {
   resetProgress();
   quizStore.currentSubject = subject;
+  quizStore.currentIcon = icon;
   quizStore.isQuizActive = true;
   quizStore.isQuizCompleted = false;
   quizStore.currentQuestionIndex = 1;
