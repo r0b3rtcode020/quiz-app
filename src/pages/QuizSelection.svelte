@@ -4,7 +4,6 @@
   import Subject from "../components/Subject.svelte";
   import Title from "../components/Title.svelte";
   import SecondaryText from "../components/SecondaryText.svelte";
-  import Switch from "../components/Switch.svelte";
 
   $effect(() => {
     resetProgress();
@@ -20,7 +19,6 @@
   };
 </script>
 
-<Switch />
 <Title text="Welcome to the" boldText="Frontend Quiz!" />
 <SecondaryText>Pick a subject to get started.</SecondaryText>
 

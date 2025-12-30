@@ -12,8 +12,6 @@
   import ErrorMessage from "../components/ErrorMessage.svelte";
   import Question from "../components/Question.svelte";
   import SecondaryText from "../components/SecondaryText.svelte";
-  import Switch from "../components/Switch.svelte";
-  import SubjectSelected from "../components/SubjectSelected.svelte";
   import ProgressBar from "../components/ProgressBar.svelte";
 
   let { subject, questionIndex } = $props();
@@ -80,11 +78,9 @@
   };
 </script>
 
-<SubjectSelected />
-<Switch />
 <SecondaryText>Question {questionIndex} of {quizStore?.totalQuestions}</SecondaryText>
 <Question question={currentQuestion?.question} />
-<ProgressBar />
+<ProgressBar current={quizStore?.currentQuestionIndex} total={quizStore?.totalQuestions} />
 <OptionsList
   options={currentQuestion?.options || []}
   {selectedAnswer}
