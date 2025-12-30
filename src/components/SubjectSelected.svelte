@@ -38,7 +38,6 @@
     color: var(--clr-text);
     border-radius: clamp(var(--sp-12), 3.15vw, var(--sp-24));
     width: 100%;
-    box-shadow: var(--shadow);
   }
 
   figure {
