@@ -1,5 +1,5 @@
 <script>
-  import { quizStore } from "../store/store.svelte.js";
+  let { subject, icon } = $props();
 
   let iconBg = $derived.by(() => {
     const colorMap = {
@@ -8,7 +8,7 @@
       javascript: "js",
       accessibility: "accessibility",
     };
-    return colorMap[quizStore.currentSubject] || "";
+    return colorMap[subject] || "";
   });
 
   let textTransform = $derived.by(() => {
@@ -18,15 +18,15 @@
       javascript: "text-capitalize",
       accessibility: "text-capitalize",
     };
-    return transformMap[quizStore.currentSubject] || "";
+    return transformMap[subject] || "";
   });
 </script>
 
 <div>
   <figure class={iconBg}>
-    <img src={quizStore.currentIcon} alt={quizStore.currentSubject} />
+    <img src={icon} alt={subject} />
   </figure>
-  <span class={textTransform}>{quizStore.currentSubject}</span>
+  <span class={textTransform}>{subject}</span>
 </div>
 
 <style>
@@ -37,7 +37,6 @@
     padding: clamp(var(--sp-8), 2.1vw, var(--sp-16));
     color: var(--clr-text);
     border-radius: clamp(var(--sp-12), 3.15vw, var(--sp-24));
-    width: 100%;
   }
 
   figure {
