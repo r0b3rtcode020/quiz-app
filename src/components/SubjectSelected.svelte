@@ -34,9 +34,7 @@
     display: flex;
     align-items: center;
     gap: clamp(var(--sp-16), 3.5vw, var(--sp-24));
-    padding: clamp(var(--sp-8), 2.1vw, var(--sp-16));
     color: var(--clr-text);
-    border-radius: clamp(var(--sp-12), 3.15vw, var(--sp-24));
   }
 
   figure {

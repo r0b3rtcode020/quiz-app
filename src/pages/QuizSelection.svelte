@@ -19,9 +19,49 @@
   };
 </script>
 
-<Title text="Welcome to the" boldText="Frontend Quiz!" />
-<SecondaryText>Pick a subject to get started.</SecondaryText>
+<section>
+  <div class="heading">
+    <Title text="Welcome to the" boldText="Frontend Quiz!" />
+    <SecondaryText>Pick a subject to get started.</SecondaryText>
+  </div>
 
-{#each quizStore?.quizzes as { title, icon }, i (i)}
-  <Subject {title} {icon} onClick={() => handleStart(title, icon)} />
-{/each}
+  <div class="subjects">
+    {#each quizStore?.quizzes as { title, icon }, i (i)}
+      <Subject {title} {icon} onClick={() => handleStart(title, icon)} />
+    {/each}
+  </div>
+</section>
+
+<style>
+  section {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(var(--sp-40), calc(0.55rem + 8.27vw), var(--sp-128));
+
+    @media (width >= 80rem) {
+      flex-direction: row;
+    }
+  }
+
+  .heading {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-16);
+
+    @media (width >= 80rem) {
+      gap: var(--sp-48);
+    }
+  }
+
+  .subjects {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-16);
+
+    @media (48rem <= width < 80rem) {
+      gap: var(--sp-24);
+    }
+  }
+</style>
