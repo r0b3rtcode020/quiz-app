@@ -14,6 +14,7 @@
 <style>
   div {
     display: flex;
+    justify-content: center;
     align-items: center;
     gap: var(--sp-8);
   }

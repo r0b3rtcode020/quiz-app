@@ -78,17 +78,66 @@
   };
 </script>
 
-<SecondaryText>Question {questionIndex} of {quizStore?.totalQuestions}</SecondaryText>
-<Question question={currentQuestion?.question} />
-<ProgressBar current={quizStore?.currentQuestionIndex} total={quizStore?.totalQuestions} />
-<OptionsList
-  options={currentQuestion?.options || []}
-  {selectedAnswer}
-  correctAnswer={currentQuestion?.answer || ""}
-  {showFeedback}
-  onAnswerSelect={handleAnswer}
-/>
-<Button label="Submit answer" onClick={handleNavigation} />
-{#if errorMessage}
-  <ErrorMessage message="Please select an answer" />
-{/if}
+<section>
+  <header>
+    <div class="heading">
+      <SecondaryText>Question {questionIndex} of {quizStore?.totalQuestions}</SecondaryText>
+      <Question question={currentQuestion?.question} />
+    </div>
+    <ProgressBar current={quizStore?.currentQuestionIndex} total={quizStore?.totalQuestions} />
+  </header>
+
+  <div class="answers">
+    <OptionsList
+      options={currentQuestion?.options || []}
+      {selectedAnswer}
+      correctAnswer={currentQuestion?.answer || ""}
+      {showFeedback}
+      onAnswerSelect={handleAnswer}
+    />
+    <Button label="Submit answer" onClick={handleNavigation} />
+    {#if errorMessage}
+      <ErrorMessage message="Please select an answer" />
+    {/if}
+  </div>
+</section>
+
+<style>
+  section {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(var(--sp-40), calc(0.55rem + 8.27vw), var(--sp-128));
+
+    @media (48rem <= width < 80rem) {
+      gap: max(var(--sp-40), calc(-2rem + 9.375vw));
+    }
+
+    @media (width >= 80rem) {
+      flex-direction: row;
+    }
+  }
+
+  header {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(var(--sp-24), 6vw, var(--sp-184));
+
+    @media (width >= 80rem) {
+      gap: var(--sp-184);
+    }
+  }
+
+  .heading {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(var(--sp-16), 3.5vw, var(--sp-24));
+  }
+
+  .answers {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(var(--sp-16), 4.25vw, var(--sp-32));
+  }
+</style>

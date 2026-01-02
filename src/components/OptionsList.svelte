@@ -23,3 +23,15 @@
     </li>
   {/each}
 </ul>
+
+<style>
+  ul {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-16);
+
+    @media (48rem <= width < 80rem) {
+      gap: var(--sp-24);
+    }
+  }
+</style>
