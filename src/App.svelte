@@ -33,6 +33,15 @@
     padding-block: clamp(var(--sp-16), calc(-0.68rem + 7.1vw), var(--sp-88));
     padding-inline: clamp(var(--sp-24), calc(-1.141rem + 11.268vw), var(--sp-144));
     min-height: 100dvh;
+    background: var(--bg-mobile) top left / cover no-repeat;
+
+    @media (width >= 48rem) {
+      background: var(--bg-tablet) top left / 50% auto no-repeat;
+    }
+
+    @media (width >= 80rem) {
+      background: var(--bg-desktop) top left / cover no-repeat;
+    }
   }
 
   header {

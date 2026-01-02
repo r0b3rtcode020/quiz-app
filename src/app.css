@@ -87,6 +87,14 @@
   /* Drop Shadows */
   --shadow-light: 0 1rem 2.5rem rgba(143, 160, 193, 0.14);
   --shadow-dark: 0 1rem 2.5rem rgba(49, 62, 81, 0.14);
+
+  /* Backgrounds */
+  --light-mobile: url("./assets/images/pattern-background-mobile-light.svg");
+  --light-tablet: url("./assets/images/pattern-background-tablet-light.svg");
+  --light-desktop: url("./assets/images/pattern-background-desktop-light.svg");
+  --dark-mobile: url("./assets/images/pattern-background-mobile-dark.svg");
+  --dark-tablet: url("./assets/images/pattern-background-tablet-dark.svg");
+  --dark-desktop: url("./assets/images/pattern-background-desktop-dark.svg");
 }
 
 [data-theme="light"] {
@@ -97,6 +105,9 @@
   --subject-bg: var(--clr-white);
   --subject-text: var(--clr-blue-900);
   --shadow: var(--shadow-light);
+  --bg-mobile: var(--light-mobile);
+  --bg-tablet: var(--light-tablet);
+  --bg-desktop: var(--light-desktop);
 }
 
 [data-theme="dark"] {
@@ -107,6 +118,9 @@
   --subject-bg: var(--clr-blue-850);
   --subject-text: var(--clr-white);
   --shadow: var(--shadow-dark);
+  --bg-mobile: var(--dark-mobile);
+  --bg-tablet: var(--dark-tablet);
+  --bg-desktop: var(--dark-desktop);
 }
 
 /****************************************************
