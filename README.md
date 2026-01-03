@@ -10,18 +10,22 @@ This is a solution to the [Frontend quiz app challenge on Frontend Mentor](https
 - CSS
   - Variables
   - Fluid typography/spacing using clamp()
+  - Theming Light/Dark (Example without persistency)
 - Flexbox
 - Mobile-first workflow
 - Responsive design
 - JavaScript framework
-  - Svelte 5
+  - Svelte 5 (Runes: $state, $derived, $effect, $props, $bindable)
+  - State management with reactive stores
+  - Routing with svelte5-router
+  - Route guards and validation
 - Vite
 - Deployment
-  - GitHub Pages
+  - Netlify with SPA routing
 
 ## Live site
 
-- Solution URL - [Live preview](https://r0b3rtcode020.github.io/quiz-app/)
+- Solution URL - [Live preview](https://quizapp-frontendmentor.netlify.app/)
 
 ## Author
 
