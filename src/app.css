@@ -4,6 +4,7 @@
   src: url("/fonts/Rubik-VariableFont_wght.ttf") format("truetype");
   font-weight: 300 500;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -11,6 +12,7 @@
   src: url("/fonts/Rubik-Italic-VariableFont_wght.ttf") format("truetype");
   font-weight: 400;
   font-style: italic;
+  font-display: swap;
 }
 
 /****************************************************
