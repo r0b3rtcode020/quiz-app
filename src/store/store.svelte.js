@@ -1,60 +1,74 @@
-export let quizStore = $state({
-  quizzes: [],
-  score: 0,
-  totalQuestions: 0,
-  currentSubject: null,
-  currentIcon: null,
-  currentQuestionIndex: 1,
-  isQuizActive: false,
-  isQuizCompleted: false,
-});
+class QuizStore {
+  quizzes = $state([]);
+  score = $state(0);
+  totalQuestions = $state(0);
+  currentSubject = $state(null);
+  currentIcon = $state(null);
+  currentQuestionIndex = $state(1);
+  isQuizActive = $state(false);
+  isQuizCompleted = $state(false);
+  isLoading = $state(false);
+  errorMessage = $state(null);
 
-export const resetScore = () => (quizStore.score = 0);
+  redirectRoute = $derived(
+    this.isQuizActive && this.currentSubject
+      ? `/quiz/${this.currentSubject}/${this.currentQuestionIndex}`
+      : "/"
+  );
 
-export const incrementScore = () => quizStore.score++;
-
-export const setTotalQuestions = total => (quizStore.totalQuestions = total);
-
-export const resetProgress = () => {
-  quizStore.currentSubject = null;
-  quizStore.currentIcon = null;
-  quizStore.currentQuestionIndex = 1;
-  quizStore.isQuizActive = false;
-  quizStore.isQuizCompleted = false;
-
-  resetScore();
-  setTotalQuestions(0);
-};
-
-export const startQuiz = (subject, totalQuestions, icon) => {
-  resetProgress();
-  quizStore.currentSubject = subject;
-  quizStore.currentIcon = icon;
-  quizStore.isQuizActive = true;
-  quizStore.isQuizCompleted = false;
-  quizStore.currentQuestionIndex = 1;
-  setTotalQuestions(totalQuestions);
-};
-
-export const advanceQuestion = () => {
-  quizStore.currentQuestionIndex += 1;
-};
-
-export const completeQuiz = () => {
-  quizStore.isQuizActive = false;
-  quizStore.isQuizCompleted = true;
-};
-
-export const getRedirectRoute = () => {
-  if (quizStore.isQuizActive && quizStore.currentSubject) {
-    return `/quiz/${quizStore.currentSubject}/${quizStore.currentQuestionIndex}`;
+  constructor() {
+    this.loadQuizzes();
   }
-  return "/";
-};
 
-const loadQuizzes = async () => {
-  const res = await fetch("/data/data.json");
-  const data = await res.json();
-  quizStore.quizzes = data.quizzes;
-};
-loadQuizzes();
+  async loadQuizzes() {
+    this.isLoading = true;
+    this.errorMessage = null;
+
+    try {
+      const res = await fetch("/data/data.json");
+      if (!res.ok) throw new Error("No se pudo cargar la información de los quizzes");
+
+      const data = await res.json();
+      this.quizzes = data.quizzes;
+    } catch (error) {
+      this.errorMessage = error.message;
+    } finally {
+      this.isLoading = false;
+    }
+  }
+
+  resetScore = () => (this.score = 0);
+  incrementScore = () => this.score++;
+  setTotalQuestions = total => (this.totalQuestions = total);
+
+  resetProgress = () => {
+    this.currentSubject = null;
+    this.currentIcon = null;
+    this.currentQuestionIndex = 1;
+    this.isQuizActive = false;
+    this.isQuizCompleted = false;
+    this.resetScore();
+    this.setTotalQuestions(0);
+  };
+
+  startQuiz = (subject, totalQuestions, icon) => {
+    this.resetProgress();
+    this.currentSubject = subject;
+    this.currentIcon = icon;
+    this.isQuizActive = true;
+    this.isQuizCompleted = false;
+    this.currentQuestionIndex = 1;
+    this.setTotalQuestions(totalQuestions);
+  };
+
+  advanceQuestion = () => {
+    this.currentQuestionIndex += 1;
+  };
+
+  completeQuiz = () => {
+    this.isQuizActive = false;
+    this.isQuizCompleted = true;
+  };
+}
+
+export const quizStore = new QuizStore();

@@ -1,5 +1,5 @@
 <script>
-  import { quizStore, resetProgress, getRedirectRoute } from "../store/store.svelte.js";
+  import { quizStore } from "../store/store.svelte.js";
   import { navigate } from "svelte5-router";
   import Button from "../components/Button.svelte";
   import Title from "../components/Title.svelte";
@@ -7,12 +7,12 @@
 
   $effect(() => {
     if (!quizStore.isQuizCompleted) {
-      navigate(getRedirectRoute(), { replace: true });
+      navigate(quizStore.redirectRoute, { replace: true });
     }
   });
 
   const handlePlayAgain = () => {
-    resetProgress();
+    quizStore.resetProgress();
     navigate("/", { replace: true });
   };
 </script>

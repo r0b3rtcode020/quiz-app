@@ -1,12 +1,12 @@
 <script>
   import { navigate } from "svelte5-router";
-  import { quizStore, resetProgress, startQuiz } from "../store/store.svelte.js";
+  import { quizStore } from "../store/store.svelte.js";
   import Subject from "../components/Subject.svelte";
   import Title from "../components/Title.svelte";
   import SecondaryText from "../components/SecondaryText.svelte";
 
   $effect(() => {
-    resetProgress();
+    quizStore.resetProgress();
   });
 
   const handleStart = (title, icon) => {
@@ -14,7 +14,7 @@
     const quiz = quizStore.quizzes.find(q => q.title.toLowerCase() === subject);
     const total = quiz?.questions?.length || 0;
 
-    startQuiz(subject, total, icon);
+    quizStore.startQuiz(subject, total, icon);
     navigate(`/quiz/${subject}/1`);
   };
 </script>

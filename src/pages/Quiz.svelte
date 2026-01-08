@@ -1,12 +1,6 @@
 <script>
   import { navigate } from "svelte5-router";
-  import {
-    quizStore,
-    incrementScore,
-    advanceQuestion,
-    completeQuiz,
-    getRedirectRoute,
-  } from "../store/store.svelte.js";
+  import { quizStore } from "../store/store.svelte.js";
   import OptionsList from "../components/OptionsList.svelte";
   import Button from "../components/Button.svelte";
   import ErrorMessage from "../components/ErrorMessage.svelte";
@@ -41,7 +35,7 @@
     }
 
     if (isInvalidQuiz) {
-      navigate(getRedirectRoute(), { replace: true });
+      navigate(quizStore.redirectRoute, { replace: true });
     }
   });
 
@@ -51,7 +45,7 @@
     errorMessage = false;
 
     if (answer === currentQuestion?.answer) {
-      incrementScore();
+      quizStore.incrementScore();
     }
   };
 
@@ -64,7 +58,7 @@
     const isLastQuestion = quizStore.currentQuestionIndex >= (quiz?.questions?.length || 0);
 
     if (isLastQuestion) {
-      completeQuiz();
+      quizStore.completeQuiz();
       navigate("/result", { replace: true });
       return;
     }
@@ -73,7 +67,7 @@
     showFeedback = false;
     errorMessage = false;
 
-    advanceQuestion();
+    quizStore.advanceQuestion();
     navigate(`/quiz/${subject}/${quizStore.currentQuestionIndex}`, { replace: true });
   };
 </script>
